@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Clock</title>
+    <style>
+      *{
+    margin:0;
+    padding:0;
+    font-variant:Gotham Rounded,sans-serif;
+}
+body {
+    background:linear-gradient(to right, SkyBlue, Pink);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:100vh;
+    overflow:hidden;
+    font-size:1.6rem;
+    
+}
+.clock{
+    height:310px;
+    width:310px;
+    background-color:rgba(255,255,255,.8);
+    border-radius:50%;
+    position:relative;
+    border:1px solid rgba(0,0,0,0.5);
+    box-shadow:0 0 25px 5px rgba(0,0,0,.4),inset 0 0 25px 2px rgba(0,0,0,0.3);
+    position:relative;
+}
+.n{ 
+    --rotation:0deg;
+    height:100%;
+    width:100%;
+    position:absolute;
+    text-align:center;
+    transform:rotate(var(--rotation));
+  
+}
+.clock:before{
+    content:'';
+    position:absolute;
+    width:19px;
+    height:19px;
+    border-radius:50%;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    background-color:black;
+    z-index:11;
+}
+.clock:after{
+    
+    content:'';
+    position:absolute;
+    height:8px;
+    width:8px;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    background-color:white;
+    z-index:12;
+    border-radius:50%;
+}
+.n1{ --rotation:30deg;}
+.n2{ --rotation:60deg;}
+.n3{ --rotation:90deg;}
+.n4{ --rotation:120deg;}
+.n5{ --rotation:150deg;}
+.n6{ --rotation:180deg;}
+.n7{ --rotation:210deg;}
+.n8{ --rotation:240deg;}
+.n9{ --rotation:270deg;}
+.n10{ --rotation:300deg;}
+.n11{ --rotation:330deg;}
+
+.hand{
+   --rotat:0;
+   position:absolute; 
+   height:46%;
+   width:15px;
+   background-color:Black;
+   left:50%;
+   bottom:50%;
+   transform:translateX(-50%)  rotate(calc(var(--rotat)*1deg));
+   transform-origin:bottom;
+   border-top-left-radius:50%;
+   border-top-right-radius:50%;
+   z-index:10; 
+   border:1px solid white;
+}
+.hours{
+    height:25%;
+    width:10px;
+    background-color:black;
+}
+.minut{
+    height:37%;
+    width:7px;
+    background-color:SkyBlue;
+    
+}
+.sec{ 
+    
+    height:45%;
+    width:3px;
+    background-color:red;
+}
+
+
+
+    </style>
+</head>
+
+<body>
+<div class="clock">
+       
+          <div class="hand hours" id="hr" ></div>
+          <div class="hand minut" id="min" ></div>
+          <div class="hand sec" id="sec" ></div>
+          
+          <div class="n n1">1</div>   
+          <div class="n n2">2</div>
+          <div class="n n3">3</div>
+          <div class="n n4">4</div>
+          <div class="n n5">5</div>
+          <div class="n n6">6</div>
+          <div class="n n7">7</div>
+          <div class="n n8">8</div>
+          <div class="n n9">9</div>
+          <div class="n n10">10</div>
+          <div class="n n11">11</div> 
+          <div class="n n12">12</div> 
+            
+       </div>
+       <script>
+         window.onload=setInterval(setHands,1000);
+
+function setHands(){
+    
+    const curDate=new Date();
+ const curSec=(curDate.getSeconds())/60;
+ const curMin=(curSec+curDate.getMinutes())/60;
+ const curHr=(curMin+curDate.getHours())/12;
+   
+   
+  min.style.setProperty("--rotat",curMin*360);
+  sec.style.setProperty("--rotat",curSec*360);
+  hr.style.setProperty("--rotat",curHr*360);
+    
+}
+
+
+
+       </script>
+</body>
+
+</html>

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Covid 19 live info</title>
+    <style>
+      body{
+        background-colo
+        position:relative;
+        
+      }
+      h1{
+        text-align:center;
+        color:red;
+        border:1px dashed;
+      }
+      select{
+        width:100%;
+        height:40px;
+        background-color:#2AB8DEFA;
+        outline:none;
+        color:white;
+        font-size:larger;
+        margin-bottom:20px;
+      }
+      .wrap{
+        width:100%;
+      }
+      .cont{
+       display:flex;
+       flex-flow:row wrap;
+        width:100%;
+        height:100%;
+        align-items:center;
+        text-justify:center;
+      }
+      .op{
+        background-color:white;
+        height:60px;
+        width:48%;
+        margin:3px;
+        margin-bottom:15px;
+        text-align:center;
+      }
+      .c{
+       color:#30C3D5D1;
+      }
+      .td{
+        color:grey;
+      }
+      .tr{
+        color:#3BDB30FA;
+      }
+      .tc{
+        color:red;
+      }
+      .tact{
+        color:#DB7E30FA;
+      }
+      .tnew{
+        color:#E4137DFA;
+      }
+      .dt{
+        color:#E41313FA
+      }
+      .sc{
+        color:#E4C513FA;
+      }
+    
+    </style>
+</head>
+
+<body>
+  <h1>Covid 19 live info</h1>
+  <select>
+    <option selected disabled>select country</option>
+  </select>
+  <div class="wrap">
+  <div class="cont"></div>
+  </div>
+  
+<script>
+
+
+//adding country options
+function c(country){
+  if(typeof country.title!="undefined"){
+  var opt=document.createElement('option');
+  opt.innerHTML=country.title;
+  selct.appendChild(opt);
+}
+  
+}
+
+
+const selct=document.querySelector('select');
+
+
+//output
+function show(val){
+ 
+ 
+  for(each in val.countryitems[0]){
+    const curr=val.countryitems[0][each];
+     c(curr);
+     selct.addEventListener("change",function(e){
+       if(e.target.value==curr.title){
+       //template output 
+        const output=`
+     <div class="op c">Country : ${curr.title}</div>
+     <div class="op tc">Total cases : ${curr.total_cases}</div>
+     <div class="op tr">Total recovered : ${curr.total_recovered}</div>
+     <div class="op td">Toatal deaths : ${curr.total_deaths}</div>
+     <div class="op tact">Total active cases : ${curr.total_active_cases}</div>
+     <div class="op tnew">New cases today : ${curr.total_new_cases_today}</div>
+    <div class="op dt">deaths today : ${curr.total_new_deaths_today}</div>
+    <div class="op sc">Serious cases : ${curr.total_serious_cases}</div>
+        `;
+       
+       document.querySelector(".cont"). innerHTML=output;
+       }
+     });
+     
+  }
+}
+
+//fetching api
+const fdata=fetch('https://api.thevirustracker.com/free-api?countryTotals=ALL').
+  then(res=>{return res.json()}).
+  then(dat=>{ 
+    
+      show(dat);
+  });
+</script>
+</body>
+
+</html>

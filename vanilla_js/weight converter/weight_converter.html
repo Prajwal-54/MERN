@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+     
+       
+      body{
+       background-color:#000;
+       color:#fff;
+       overflow:hidden;
+    
+      
+      }
+      .container {
+      position:absolute;
+       width:300px;
+       height:50px;
+       top:20%;
+       left:50%;
+       transform:translate(-50%,-20%);
+       color:#307FE4;
+       text-align:center;
+      }
+      h2{
+        font-size:1.6rem;
+         font-weight:500;
+         color:#307FE4;
+        
+      }
+      input{
+        outline:none;
+        width:100%;
+        height:27px;
+        color:#307FE4;
+      }
+      .vals{
+        position:absolute;
+        text-align:left;
+        visibility:hidden;
+        width:100%;
+        
+   
+      }
+   
+    </style>
+    <title>Weight converter</title>
+</head>
+
+<body>
+  <div class="container">
+    <h2>Weight Converter</h2>
+    
+    <input type="number" placeholder="Enter Kilograms...">
+  <div class="vals">
+    <div class="grm">
+  <h4>Grames: <div id="g"></div></h4>
+    </div>
+    <div class="mill">
+  <h4>Milligrammes: <div id="milli"></div></h4>
+  </div>
+  <div class="pnd">
+   <h4>Pounds: <div id="pound"></div></h4>
+   </div>
+   <div class="o">
+  <h4>Ounces: <div id="ounce"></div></h4>
+    </div>
+    </div>
+  </div>
+<script>
+ document.querySelector("input").addEventListener("input",(e)=>{
+   document.querySelector(".vals").style.visibility="visible";
+   var val=e.target.value;
+   
+  document.querySelector("#g").innerHTML=val*1000;
+  
+  document.querySelector("#pound").innerHTML=val*2.20462;
+  
+  document.querySelector("#ounce").innerHTML=val*35.274;
+  document.querySelector("#milli"). innerHTML=val*1e+6;
+  
+   
+ })
+</script>
+</body>
+
+</html>

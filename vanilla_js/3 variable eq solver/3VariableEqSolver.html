@@ -1,0 +1,388 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solution of Three Linear Equation</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body{
+            /* background-color:	#FFC0CB ; */
+            background-image: linear-gradient(0deg,#89F7DA 33%,
+    rgb(252,221,221)77% );
+            font-family: 'Rubik', sans-serif;
+        }
+
+        .main{
+            text-align: center;
+            height: 100vh;
+        }
+
+        h1{
+            margin-top: 3%;
+            font-size: 21px;
+            font-weight: 700;
+            text-align: center;
+            text-decoration: underline;
+            color:black ;
+        }
+        .input-container{
+            margin: 2% 0 2% 0;
+        }
+
+        @media screen and (max-width: 700px){
+            .input-container{
+                margin: 5% 0 5% 0;
+            }
+        }
+
+        .first-equation, .second-equation, .third-equation{
+            padding: 15px;
+            font-size: 20px;
+            font-weight: 500;
+        }
+
+        input{
+            height: 30px;
+            width: 70px;
+            outline: none;
+            border:none;
+            /* background-color: rgb(188, 246, 227); */
+            background-color: #d8faf1;
+            font-size: 20px;
+            text-align: center;
+            box-shadow: 0px 13px 20px rgba(0, 0, 0, 0.253);
+            border-radius: 5px;
+            font-family: 'Rubik', sans-serif;
+
+        }
+
+        button{
+            padding: 13px;
+            padding-left: 25px;
+            padding-right: 25px;
+            margin-left: 10px;
+            margin-right: 10px;
+            text-align: center;
+            background-color: rgb(255, 255, 255);
+            border: none;
+            border-radius: 5px;
+            font-size: 17px;
+            cursor: pointer;
+            /* box-shadow: 0px 15px 20px rgba(0, 0, 0, 0.253); */
+            box-shadow:10px 10px 15px 0 rgba(256,159,159,0.6);
+            text-decoration: none;
+            outline: none;
+            color: rgb(92, 91, 91);
+            font-family: 'Rubik', sans-serif;
+            font-weight: 700;
+        }
+
+
+        .output-container{
+            display: flex;
+            text-align: center;
+            margin-top: 50px;
+            margin-left: 15%;
+            width: 70%;
+            padding: 13px;
+            text-align: center;
+            background-color: rgb(255, 255, 255);
+            border: none;
+            border-radius: 5px;
+            font-size:17px;
+            box-shadow: 0px 15px 20px rgba(0, 0, 0, 0.253);
+            text-decoration: none;
+            outline: none;
+            color: rgb(92, 91, 91);
+            font-weight: 500;
+        }
+
+        @media screen and (max-width: 700px){
+            .output-container{
+                width: 90%;
+                margin-left: 5%;
+            }
+        }
+
+        .output-container > div {
+            margin: 5px;
+            font-size: 17px;
+            box-shadow:5px 7px 12px 0 rgba(256,159,159,0.4)
+            
+        }
+
+
+        .result{
+            width: 70%;
+            padding: 10px;
+            text-align: center;
+            /* background-color: rgba(231, 231, 231, 0.767); */
+            background-color: #d9f8f0;
+            border: none;
+            border-radius: 5px;
+            font-size: 17px;
+            box-shadow: 0px 15px 20px rgba(0, 0, 0, 0.253);
+            text-decoration: none;
+            outline: none;
+            color: black;
+            font-weight: 500;
+        }
+
+        .text {
+            width: 30%;
+            padding: 7px;
+            text-align: center;
+            /* background-color: rgb(144, 193, 248)rgb(252,221,221; */
+            background-color: #bdf8e8;
+            border: none;
+            border-radius: 5px;
+            font-size: 20px;
+            box-shadow: 0px 15px 20px rgba(0, 0, 0, 0.253);
+            text-decoration: none;
+            outline: none;
+            color:black;
+            font-weight: 700;
+        }
+
+
+        .solution-type{
+            height: 35px;
+            margin-left: 15%;
+            margin-top: 20px;
+            width: 70%;
+            /* background-color: rgba(240, 239, 239, 0.863); */
+            /* box-shadow: 0px 15px 20px rgba(0, 0, 0, 0.253); */
+            background-color: #bdf8e8;
+            box-shadow:10px 10px 17px 0 rgba(256,159,159,0.6);
+            border-radius: 5px;
+            font-size: 20px;
+            color: rgb(92, 91, 91);
+            font-weight: 500;
+            text-align: center;
+            padding: 6px;
+            margin-bottom: 5%;
+        }
+
+        @media screen and (max-width: 700px){
+            .solution-type{
+                width: 90%;
+                margin-left: 5%;
+            }
+        }
+
+        .warning-msg{
+            height: 35px;
+            margin-left: 15%;
+            margin-top: 20px;
+            width: 70%;
+            background-color: rgba(250, 183, 183, 0.863);
+            box-shadow: 0px 15px 20px rgba(0, 0, 0, 0.253);
+            border-radius: 5px;
+            font-size: 20px;
+            color: rgb(34, 34, 34);
+            font-weight: 500;
+            text-align: center;
+            padding: 5px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="main">
+        <h1>Linear Equations with Three Variables</h1>
+
+        <!-- Input Container -->
+        <div class="input-container">
+            <div class="first-equation">
+                <input type="number"  name="a1" id="a1" placeholder="a&#8321;"> X + 
+                <input type="number"  name="b1" id="b1" placeholder="b&#8321;"> Y +
+                <input type="number"  name="c1" id="c1" placeholder="c&#8321;"> Z = 
+                <input type="number"  name="d1" id="d1"  onclick="this.select()" value="0">
+            </div>
+
+            <div class="second-equation">
+                <input type="number"  name="a2" id="a2" placeholder="a&#8322;"> X + 
+                <input type="number"  name="b2" id="b2" placeholder="b&#8322;"> Y +
+                <input type="number"  name="c2" id="c2" placeholder="c&#8322;"> Z = 
+                <input type="number"  name="d2" id="d2" onclick="this.select()"placeholder="d&#8322;" value="0">
+            </div>
+
+            <div class="third-equation">
+                <input type="number"  name="a3" id="a3" placeholder="a&#8323;"> X + 
+                <input type="number"  name="b3" id="b3" placeholder="b&#8323;"> Y +
+                <input type="number"  name="c3" id="c3" placeholder="c&#8323;"> Z = 
+                <input type="number"  name="d3" id="d3"  onclick="this.select()" placeholder="d&#8323;" value="0">
+            </div>
+        </div>
+
+        <!-- Buttons -->
+        <div class="btn-conatiner">
+            <button class="calculate-btn" onclick="result()">Calculate</button>
+            <button class="clear-btn" onclick="clearData()">Clear</button>
+        </div>
+
+        <div  id="warning-msg"></div>
+
+        <!-- Output Container -->
+        <div class="output-container">
+            <div class="text">(X, Y, Z)</div> 
+            <div class="result" id="result"></div>
+
+        </div>
+
+
+        <!-- Solution Type Container -->
+        <div class="solution-type" id="solution-type"></div>
+    </div>
+
+    <script > 
+    
+var a1, b1, c1, a2, b2, c2, a3, b3, c3, d1, d2, d3;
+var DY, DX, DZ, valueOfX, valueOfY, valueOfZ;
+var typeOfEquation, warningMessage, discriminant, caseType;
+
+const result = () => {
+    var validity = true;
+    a1 = document.getElementById("a1").value;
+    b1 = document.getElementById("b1").value;
+    c1 = document.getElementById("c1").value;
+    a2 = document.getElementById("a2").value;
+    b2 = document.getElementById("b2").value;
+    c2 = document.getElementById("c2").value;
+    a3 = document.getElementById("a3").value;
+    b3 = document.getElementById("b3").value;
+    c3 = document.getElementById("c3").value;
+    d1 = document.getElementById("d1").value;
+    d2 = document.getElementById("d2").value;
+    d3 = document.getElementById("d3").value;
+
+    
+    (a1 == "") ? a1 = 0 : a1 = a1;
+    (b1 == "") ? b1 = 0 : b1 = b1;
+    (c1 == "") ? c1 = 0 : c1 = c1;
+    (a2 == "") ? a2 = 0 : a2 = a2;
+    (b2 == "") ? b2 = 0 : b2 = b2;
+    (c2 == "") ? c2 = 0 : c2 = c2;
+    (a3 == "") ? a3 = 0 : a3 = a3;
+    (b3 == "") ? b3 = 0 : b3 = b3;
+    (c3 == "") ? c3 = 0 : c3 = c3;
+
+    
+    if(a1 == 0 && a2 == 0 && a3 == 0 && b1 == 0 && b2 == 0 && b3 == 0 && c1 == 0 && c2 == 0 && c3==0){
+        validity = false;
+        warningMessage = "Insufficient Data!";
+    } else if(a1 == 0 && b1 == 0 && c1 == 0){
+        validity = false;
+        warningMessage = "First Equation Invalid!";
+    } else if(a2 == 0 && b2 == 0 && c2 == 0){
+        validity = false;
+        warningMessage = "Second Equation Invalid!";
+    } else if(a3 == 0 && b3 == 0 && c3 == 0){
+            validity = false;
+            warningMessage = "Third Equation Invalid!";
+    } else if(a1==0 && a2 == 0 && a3 == 0){
+        validity = false;
+        warningMessage = "coefficient(s) of x missing!";
+    } else if(b1==0 && b2==0 && b3==0){
+        validity = false;
+        warningMessage = "coefficient(s) of y missing!";
+    } else if(c1==0 && c2==0 && c3==0){
+        validity = false;
+        warningMessage = "coefficient(s) of z missing!";
+    }
+
+    if(validity == false){
+        document.getElementById('warning-msg').setAttribute("class", "warning-msg");
+        document.getElementById('warning-msg').innerText = warningMessage;
+    } else {
+        discriminant = a1 * (b2 * c3 - c2 * b3) - b1 * (a2 * c3 - c2 * a3) + c1 * (a2 * b3 - b2 * a3);
+        DX = d1 * (b2 * c3 - c2 * b3) - b1 * (d2 * c3 - c2 * d3) + c1 * (d2 * b3 - b2 * d3);
+        DY = a1 * (d2 * c3 - c2 * d3) - d1 * (a2 * c3 - c2 * a3) + c1 * (a2 * d3 - d2 * a3);
+        DZ = a1 * (b2 * d3 - d2 * b3) - b1 * (a2 * d3 - d2 * a3) + d1 * (a2 * b3 - b2 * a3);
+    }
+
+   
+
+    if(discriminant == 0){
+       if(DX == 0 && DY == 0 && DZ == 0){
+           typeOfEquation = "Infinite Solutions";
+           DX = "INF";
+           DY = "INF";
+           DZ = "INF";
+           caseType = "INF";
+           
+       } else {
+           typeOfEquation = "No Solution";
+           DX = "NO";
+           DY = "NO";
+           DZ = "NO";
+           caseType = "NO";
+           
+
+       }
+    } else {
+            typeOfEquation = "Unique Solution";
+            caseType = "UNI";
+
+            valueOfX = DX / discriminant;
+            valueOfY = DY / discriminant;
+            valueOfZ = DZ / discriminant;
+            valueOfX =  Number.isInteger(valueOfX) ? valueOfX : valueOfX.toPrecision(4);
+            valueOfY =  Number.isInteger(valueOfY) ? valueOfY : valueOfY.toPrecision(4);
+            valueOfZ =  Number.isInteger(valueOfZ) ? valueOfZ : valueOfZ.toPrecision(4);
+        }
+
+    if(validity == true){
+        document.getElementById('warning-msg').removeAttribute("class", "warning-msg");
+        document.getElementById('warning-msg').innerText = "";
+        if(caseType == "INF")
+            document.getElementById("result").innerText = `INF`;
+        else if(caseType == "NO")
+            document.getElementById("result").innerText = `NO`;
+        else if(caseType == "UNI")
+            document.getElementById("result").innerText = `(${valueOfX}, ${valueOfY}, ${valueOfZ})`;
+        document.getElementById("solution-type").innerText = typeOfEquation;
+    }
+
+}
+
+
+
+const clearData = () => {
+    document.getElementById("a1").value = "";
+    document.getElementById("b1").value = "";
+    document.getElementById("c1").value = "";
+    document.getElementById("a2").value = "";
+    document.getElementById("b2").value = "";
+    document.getElementById("c2").value = "";
+    
+    document.getElementById("a3").value = "";
+    document.getElementById("b3").value = "";
+    document.getElementById("c3").value = "";
+
+    document.getElementById("d1").value = "0";
+    document.getElementById("d2").value = "0";
+    document.getElementById("d3").value = "0";
+
+
+    document.getElementById("result").innerText = "";
+    document.getElementById("solution-type").innerText = "";
+}
+    
+    
+    
+    
+    </script>
+</body>
+</html>

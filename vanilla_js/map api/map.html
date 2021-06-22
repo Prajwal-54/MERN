@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>my location</title>
+    <style>
+      #map{
+        height:400px;
+        width:100%;
+      }
+      h2{
+        text-align:center;
+      }
+    </style>
+</head>
+
+<body>
+  <h2>My location</h2>
+<div id="map"></div>
+
+<script>
+   
+   function initMap(){
+
+      // Map options
+
+      var location= {
+        zoom:15,
+        center:{lat:13.9439,lng:74.5928}
+      }
+      
+       // New map
+      var map = new google.maps.Map(document.getElementById('map'), location);
+      //marker
+      var mark=new google.maps.Marker({
+        position:{lat:13.9439,lng:74.5928},
+        map:map,
+        icon:'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png'
+      });
+
+      
+      var infoWindow = new google.maps.InfoWindow({
+        content:`<h3>my location</h3>
+                 <h4>Gorte Cross 💪😘 </h4>`
+      });
+
+      mark.addListener('click', function(){
+        infoWindow.open(map, mark);
+      });
+
+
+}
+</script>
+
+  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA4BqN8DouFYQMoChmXq2lMIHGGP7F095Y&callback=initMap"
+  type="text/javascript"></script>
+
+</body>
+
+</html>

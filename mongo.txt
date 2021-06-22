@@ -1,0 +1,188 @@
+mongo db commands
+
+//shows dbs
+show dbs
+
+//show current db
+db
+
+//show collections
+show collections
+
+//switches to DATABASENAME if not exists creats one
+use DATABASENAME
+
+//deleting db
+db.dropDatabase()
+
+
+//create new collections
+db.createCollection('collectionName')
+
+
+//exampls
+use test
+db.createCollection('posts')
+
+//inserts multiple data in posts collection in test db in   //single raw
+db.posts.insert({
+    title:'post 1',
+    body:'body of post one',
+    category: 'News',
+    likes:4,
+    tags:['news','events'],
+    date:Date(),
+    user:{
+        name:'joe',
+        status:'author'
+    }
+})
+
+//insert multiple raws
+db.posts.insertMany([
+  {
+    title: 'Post Two',
+    body: 'Body of post two',
+    category: 'Technology',
+    date: Date()
+  },
+  {
+    title: 'Post Three',
+    body: 'Body of post three',
+    category: 'News',
+    date: Date()
+  },
+  {
+    title: 'Post Four',
+    body: 'Body of post three',
+    category: 'Entertainment',
+    date: Date()
+  }
+])
+
+
+//Get All Rows
+db.posts.find()
+
+Get All Rows Formatted
+db.posts.find().pretty()
+
+Find Rows
+db.posts.find({ category: 'News' }).pretty()
+
+Sort Rows
+# asc
+db.posts.find().sort({ title: 1 }).pretty()
+# desc
+db.posts.find().sort({ title: -1 }).pretty()
+
+Count Rows
+db.posts.find().count()
+db.posts.find({ category: 'News' }).count()
+
+Limit Rows
+db.posts.find().limit(2).pretty()
+
+
+Foreach
+db.posts.find().forEach(function(doc) {
+  print("Blog Post: " + doc.title)
+})
+
+Find One Row
+db.posts.findOne({ category: 'News' })
+
+
+db.posts.find({ title: 'Post Two' }, {
+  title: 1,
+  author: 1
+})
+
+Update Row
+//upsert true means post is insert if it does not exists 
+db.posts.update({ title: 'Post Two' },
+{
+  title: 'Post Two',
+  body: 'New body for post 2',
+  date: Date()
+},
+{
+  upsert: true
+})
+
+db.posts.update({ title: 'Post Two' },
+{
+  $set: {
+    body: 'Body for post 2',
+    category: 'Technology'
+  }
+})
+
+Increment Field ($inc)
+db.posts.update({ title: 'Post Two' },
+{
+  $inc: {
+    likes: 5
+  }
+})
+
+Rename Field
+db.posts.update({ title: 'Post Two' },
+{
+  $rename: {
+    likes: 'views'
+  }
+})
+
+
+Delete Row
+db.posts.remove({ title: 'Post Four' })
+
+
+Sub-Documents
+db.posts.update({ title: 'Post One' },
+{
+  $set: {
+    comments: [
+      {
+        body: 'Comment One',
+        user: 'Mary Williams',
+        date: Date()
+      },
+      {
+        body: 'Comment Two',
+        user: 'Harry White',
+        date: Date()
+      }
+    ]
+  }
+})
+
+Find By Element in Array ($elemMatch)
+db.posts.find({
+  comments: {
+     $elemMatch: {
+       user: 'Mary Williams'
+       }
+    }
+  }
+)
+Add Index
+db.posts.createIndex({ title: 'text' })
+
+Text Search
+db.posts.find({
+  $text: {
+    $search: "\"Post O\""
+    }
+})
+
+
+Greater & Less Than
+db.posts.find({ views: { $gt: 2 } })
+db.posts.find({ views: { $gte: 7 } })
+db.posts.find({ views: { $lt: 7 } })
+db.posts.find({ views: { $lte: 7 } })
+
+
+
